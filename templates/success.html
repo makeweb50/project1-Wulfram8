@@ -4,8 +4,10 @@
     Success!
 {% endblock %}
 
+{% block nav %}
+{% endblock %}
 {% block body %}
     <h1>Success!</h1>
 
-  {{ message }}(<a href="{{ url_for('index')}}">back</a>). 
+  {{ message }}(<a href="{{ url_for('index')}}">back</a>).
 {% endblock %}
