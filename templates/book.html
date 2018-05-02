@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  {{ book.title }}
+{% endblock %}
+
+{% block body %}
+  <h2>Название книги: {{ book.title }}</h2>
+  <h2>Автор: {{ book.author }}</h2>
+  <h3>Год: {{ book.year }}</h3>
+  <h4>ISBN: {{ book.isbn }}</h4>
+  <h6>Средняя оценка на сайте <a href="https://www.goodreads.com/">goodreads</a>: <h4>{{ gr['average'] }}</h4>
+  (всего оценок: {{ gr['rcount'] }})</h6>
+{% endblock %}

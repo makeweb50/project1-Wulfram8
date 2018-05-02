@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Книжки?
+{% endblock %}
+
+{% block body %}
+  {% for row in result %}
+    <p>{{ row }}</p>
+  {% endfor %}
+{% endblock %}
