@@ -5,25 +5,6 @@
 {% endblock %}
 
 {% block body %}
-    {% if login %}
-    <div class="row">
-      <div class="col-4">
-        <h1><a href="{{ url_for('index') }}">CHE pacani Knigi?</a></h1>
-      </div>
-      <div class="col-6 align-self-center">
-        <form class="input-group mb-3" action="{{ url_for('index') }}" method="post">
-          <input name="search" type="search" class="form-control" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="submit">Поиск</button>
-          </div>
-        </form>
-      </div>
-      <div class="col-2">
-        <h4>{{ nickname }}</h4>
-        <h6>@{{ login }}</h6>
-        <a href="{{ url_for('exit') }}">Выйти из аккаунта</a>
-      </div>
-    </div>
     {%if search %}
       {% for row in result %}
       <div class="container">
@@ -40,17 +21,5 @@
         </div>
       </div>
       {% endfor %}
-    {% endif %}
-    {% endif %}
-    {% if not login %}
-    <div class="row">
-      <div class="col-4">
-        <h1>CHe pacani knigi?</h1>
-      </div>
-      <div class="col-2 offset-6">
-        <a href="{{ url_for('signin') }}">Войти</a>
-        <a href="{{ url_for('registr') }}">Зарегистрироваться</a>
-      </div>
-    </div>
     {% endif %}
 {% endblock %}

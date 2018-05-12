@@ -13,11 +13,27 @@
     <h6>Средняя оценка на сайте <a href="https://www.goodreads.com/">goodreads</a>: <h4>{{ gr['average'] }}</h4>
       (всего оценок: {{ gr['rcount'] }})</h6>
   {% endif %}
-  <div class="container">
+  <h4>Комментарии:</h4>
+  <br>
+  {% for rev in reviews %}
+    <div class="container">
+      <div class="row">
+        <h3 class="text-primary">{{ rev.nickname }} пишет: </h3>
+      </div>
+      <div class="row">
+        <div class="col">
+          <p>{{ rev.text }}</p>
+          <h6>Оценка: {{ rev.rating }}</h6>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+  {% if kom %}
+  <div id="kom" class="container">
     <div class="row">
       <form class="" action="{{ url_for('book', isbn=book.isbn) }}" method="post">
         <div class="row justify-content-end">
-          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <div class="btn-group btn-group-toggle btn-group-sm" data-toggle="buttons">
             <label class="btn btn-secondary">
               <input type="radio" name="rating" id="rating1" value="1" autocomplete="off"> 1
             </label>
@@ -44,5 +60,5 @@
       </form>
     </div>
   </div>
-
+  {% endif %}
 {% endblock %}
