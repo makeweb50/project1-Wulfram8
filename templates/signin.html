@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block head %}
+  <script src="{{ url_for('static', filename='signin.js') }}"></script>
+{% endblock %}
+
+{% block title %}
+  Войти
+{% endblock %}
+
+{% block body %}
+<form action="{{ url_for('signin') }}" method="post">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Логин:</label>
+    <input name="login" type="text" class="form-control" id="login" placeholder="Логин">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Пароль:</label>
+    <input name="password" type="password" class="form-control" id="password" placeholder="Пароль">
+  </div>
+  <button id="submit" type="submit" class="btn btn-primary">Войти</button>
+</form>
+{% endblock %}
