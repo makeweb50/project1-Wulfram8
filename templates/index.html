@@ -1,10 +1,27 @@
 {% extends "layout.html" %}
 
+{% block head %}
+  <style media="screen">
+    body {
+      {% if login %}
+        background: url({{ url_for('static', filename='Background3.png') }}) no-repeat center top #000000;
+      {% else %}
+        background: url({{ url_for('static', filename='Background1.png') }}) no-repeat center top #000000;
+      {% endif %}
+    }
+  </style>
+{% endblock %}
+
+{% block search %}
+{% endblock %}
+
+
 {% block title %}
-  Книжки?
+  Книги?
 {% endblock %}
 
 {% block body %}
+  {% if login %}
     {%if search %}
       {% for row in result %}
       <div class="container">
@@ -21,5 +38,63 @@
         </div>
       </div>
       {% endfor %}
+    {% else %}
+    <div style="color: white;" class="container-fluid h-100">
+      <div class="row justify-content-center">
+          <h2>Поиск</h2>
+        <div class="col-8">
+          <form class="form-inline my-4 my-lg-0" action="{{ url_for('index') }}" method="post">
+            <input class="form-control mr-sm-2" name="search" type="search" size="50" placeholder="Название книги, автор или ISBN номер" aria-label="Search">
+            <button class="btn btn-primary my-2 my-sm-0" type="submit">Найти</button>
+          </form>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div style="margin-left: -20px;" class="blr col-8">
+          <h3>Недавно просмотренные</h3>
+          {% for book in cntx['hstr'] | reverse %}
+            <div onclick="location.href='{{ url_for('book', isbn=book.isbn) }}'" class="link row blr">
+              <div class="col">
+                <h5>{{ book.title }}</h5>
+                <h6>{{ book.author }}</h6>
+              </div>
+            </div>
+          {% else %}
+            <h5>Пока здесь ничего нет</h5>
+          {% endfor %}
+        </div>
+        <div onclick="location.href='{{ url_for('book', isbn=cntx['rnd'].isbn) }}'" style="margin-right: -20px;" class="link blr col-4">
+          <h3>Может быть интересно</h3>
+          <h5>Название книги: {{ cntx['rnd'].title }}</h5>
+          <h5>Автор: {{ cntx['rnd'].author }}</h5>
+          <h5>Год: {{ cntx['rnd'].year }}</h5>
+          <h6>Рейтинг: {{ cntx['avg'] }} </h6>
+        </div>
+      </div>
+    </div>
     {% endif %}
+  {% else %}
+    <div class="logo">
+      <p onclick="location.href='{{ url_for('index') }}'">KNIGI?</p>
+    </div>
+    <div style="top: 38%; text-align: center; color: white;" class="container-fluid h-100">
+      <div class="row justify-content-center">
+        <div class="blur">
+          <h3>Тут чужакам не рады так <br> что будьте добры</h3>
+          <a role="button" aria-pressed="true" href="{{ url_for('registr') }}" class="btn btn-primary btn-lg">Зарегистрироваться</a>
+          <h5>или</h5>
+          <a role="button" aria-pressed="true" href="{{ url_for('signin') }}" class="btn btn-primary btn-lg">Войти</a>
+        </div>
+        <div class="row footer">
+          <div class="col"></div>
+          <div class="col">
+            <p>sssssskfklffjdhjfhdfjskslfslsfsfssss</p>
+          </div>
+          <div class="col">
+            <p style="text-align: right; font-family: SansationLight;">Knigi&copy; MMXVIII-MMXIX</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
 {% endblock %}

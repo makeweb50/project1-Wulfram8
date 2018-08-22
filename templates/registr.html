@@ -2,6 +2,11 @@
 
 {% block head %}
   <script src="{{ url_for('static', filename='registr.js') }}"></script>
+  <style media="screen">
+  body {
+    background: url({{ url_for('static', filename='Background2.png') }}) no-repeat center top #000000;{}
+  }
+  </style>
 {% endblock %}
 
 {% block title %}
@@ -9,28 +14,37 @@
 {% endblock %}
 
 {% block body %}
-<h1>Регистрация</h1>
-<form action="{{ url_for('registr') }}" method="post">
-  <div class="form-group col-6">
-    <label for="exampleInputNickname">Псевдоним:</label>
-    <input name="nickname" type="text" class="form-control" id="Nickname" placeholder="Псевдоним">
+<div class="logo">
+  <p onclick="location.href='{{ url_for('index') }}'">KNIGI?</p>
+</div>
+<div class="container-fluid h-100" style="color: white;">
+  <div class="row justify-content-center">
+    <div style="top: 20%; width: 40%" class="blur">
+      <form action="{{ url_for('registr') }}" method="post">
+        <h4 style="text-align: center;">Оуу... Регистрация</h3>
+        <div class="form-group col">
+          <label for="exampleInputNickname">Псевдоним:</label>
+          <input name="nickname" type="text" class="form-control" id="Nickname" placeholder="Псевдоним">
+        </div>
+        <div class="form-group col">
+          <label for="exampleInputEmail1">Логин:</label>
+          <input name="login" type="text" class="form-control" id="login" placeholder="Логин">
+        </div>
+        <div class="form-group col">
+          <label for="exampleInputPassword1">Пароль:</label>
+          <input name="password" type="password" class="form-control" id="Password1" placeholder="Пароль">
+          <div id="err1" class="invalid-feedback"></div>
+        </div>
+        <div class="form-group col">
+          <label for="exampleInputPassword1">Пароль:</label>
+          <input name="password" type="password" class="form-control" id="cPassword1" placeholder="Пароль">
+          <div id="err2" class="invalid-feedback"></div>
+        </div>
+        <div class="col-2">
+          <button id="submit" type="submit" class="btn btn-primary btn-lg">Зарегистрироваться</button>
+        </div>
+      </form>
+    </div>
   </div>
-  <div class="form-group col-6">
-    <label for="exampleInputEmail1">Логин:</label>
-    <input name="login" type="text" class="form-control" id="login" placeholder="Логин">
-  </div>
-  <div class="form-group col-6">
-    <label for="exampleInputPassword1">Пароль:</label>
-    <input name="password" type="password" class="form-control" id="Password1" placeholder="Пароль">
-    <div id="err1" class="invalid-feedback"></div>
-  </div>
-  <div class="form-group col-6">
-    <label for="exampleInputPassword1">Пароль:</label>
-    <input name="password" type="password" class="form-control" id="cPassword1" placeholder="Пароль">
-    <div id="err2" class="invalid-feedback"></div>
-  </div>
-  <div class="col-2">
-    <button id="submit" type="submit" class="btn btn-primary">Зарегистрироваться</button>
-  </div>
-</form>
+</div>
 {% endblock %}

@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   document.querySelector('#login').onkeyup = () => {
-    if (document.querySelector('#login').value){
+    if (document.querySelector('#login').value && document.querySelector('#Password1').value && document.querySelector('#cPassword1').value){
       document.querySelector('#submit').disabled = false;
     }
     else{

@@ -2,6 +2,11 @@
 
 {% block head %}
   <script src="{{ url_for('static', filename='signin.js') }}"></script>
+  <style media="screen">
+  body {
+    background: url({{ url_for('static', filename='Background2.png') }}) no-repeat center top #000000;{}
+  }
+  </style>
 {% endblock %}
 
 {% block title %}
@@ -9,15 +14,28 @@
 {% endblock %}
 
 {% block body %}
-<form action="{{ url_for('signin') }}" method="post">
-  <div class="form-group">
-    <label for="exampleInputEmail1">Логин:</label>
-    <input name="login" type="text" class="form-control" id="login" placeholder="Логин">
+<div class="logo">
+  <p onclick="location.href='{{ url_for('index') }}'">KNIGI?</p>
+</div>
+<div class="container-fluid h-100" style="color: white;">
+  <div class="row justify-content-center">
+    <div style="width: 36%;" class="blur">
+      <form action="{{ url_for('signin') }}" method="post">
+        <h4 style="text-align: center;">Да это вход</h4>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Логин:</label>
+          <input name="login" type="text" class="form-control" id="login" placeholder="Логин">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Пароль:</label>
+          <input name="password" type="password" class="form-control" id="password" placeholder="Пароль">
+          <div style="color: red;" class="">
+            {{ error }}
+          </div>
+        </div>
+        <button id="submit" type="submit" class="btn btn-primary btn-lg">Войти</button>
+      </form>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Пароль:</label>
-    <input name="password" type="password" class="form-control" id="password" placeholder="Пароль">
-  </div>
-  <button id="submit" type="submit" class="btn btn-primary">Войти</button>
-</form>
+</div>
 {% endblock %}
