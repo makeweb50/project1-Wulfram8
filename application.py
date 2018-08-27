@@ -10,9 +10,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 
 app = Flask(__name__)
 
-# Check for environment variable
-if not os.getenv("DATABASE_URL"):
-    raise RuntimeError("DATABASE_URL is not set")
+
 
 # Configure session to use filesystem
 app.config["SESSION_PERMANENT"] = False
@@ -20,7 +18,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Set up database
-engine = create_engine(os.getenv("DATABASE_URL"))
+engine = create_engine("postgres://zzhtcfcgaobuze:038dd636f425caec2d358481d1b5031360dacc04f8849b11ec4b7e19d9ba1b35@ec2-79-125-117-53.eu-west-1.compute.amazonaws.com:5432/dc5t085gj2vk3")
 db = scoped_session(sessionmaker(bind=engine))
 
 
@@ -44,6 +42,7 @@ def index():
         ksearch = '%' + search + '%'
         result = db.execute("SELECT * FROM books WHERE to_tsvector(author) || to_tsvector(title) @@ plainto_tsquery(:search) OR isbn LIKE :ksearch",
             {"search": search, "ksearch": ksearch})
+
         return render_template("index.html", search=search, result = result, nickname = session["nickname"], login = session["login"])
 
 @app.route("/registration", methods=["GET", "POST"])
@@ -69,7 +68,7 @@ def registr():
         else:
             return render_template('error.html', message='400, Bad request'), 400
 
-        return render_template('success.html', message="You sign up!")
+        return redirect(url_for('index'))
 
 @app.route("/signin", methods=["GET", "POST"])
 def signin():
@@ -113,7 +112,8 @@ def book(isbn):
             if len(session["history"]) > 3:
                 session["history"].pop(0)
             session["history"].append(book)
-        revUsers = db.execute("SELECT nickname FROM reviews JOIN users ON users.id=reviews.user_id").fetchall()
+        revUsers = db.execute("SELECT nickname FROM reviews JOIN users ON users.id=reviews.user_id WHERE reviews.book_isbn=:isbn",
+                                {"isbn": isbn})
         if session["nickname"] in revUsers:
             kom = False
         else:

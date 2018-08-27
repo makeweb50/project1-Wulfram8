@@ -1,64 +1,182 @@
 {% extends "layout.html" %}
 
+{% block head %}
+<script src="{{ url_for('static', filename='stars.js') }}"></script>
+<style media="screen">
+  body {
+    background: url({{ url_for('static', filename='Background3.png') }}) no-repeat center top #000000;{}
+  }
+</style>
+{% endblock %}
+
 {% block title %}
   {{ book.title }}
 {% endblock %}
 
 {% block body %}
-  <h2>Название книги: {{ book.title }}</h2>
-  <h2>Автор: {{ book.author }}</h2>
-  <h3>Год: {{ book.year }}</h3>
-  <h4>ISBN: {{ book.isbn }}</h4>
-  {% if gr: %}
-    <h6>Средняя оценка на сайте <a href="https://www.goodreads.com/">goodreads</a>: <h4>{{ gr['average'] }}</h4>
-      (всего оценок: {{ gr['rcount'] }})</h6>
-  {% endif %}
-  <h4>Комментарии:</h4>
-  <br>
-  {% for rev in reviews %}
-    <div class="container">
-      <div class="row">
-        <h3 class="text-primary">{{ rev.nickname }} пишет: </h3>
-      </div>
-      <div class="row">
-        <div class="col">
-          <p>{{ rev.text }}</p>
-          <h6>Оценка: {{ rev.rating }}</h6>
-        </div>
+  <div class="container-fluid wh">
+    <div class="row">
+      <div class="col">
+        <h1>Название книги: {{ book.title }}</h1>
+        <h2>Автор: {{ book.author }}</h2>
+        <h3>Год: {{ book.year }}</h3>
+        <h4>ISBN: {{ book.isbn }}</h4>
+        {% if gr: %}
+        <h6>Средняя оценка на сайте <a href="https://www.goodreads.com/">goodreads</a>: <h1>{{ gr['average'] }}</h1>
+          (всего оценок: {{ gr['rcount'] }})</h6>
+          {% endif %}
       </div>
     </div>
-  {% endfor %}
-  {% if kom %}
-  <div id="kom" class="container">
-    <div class="row">
-      <form class="" action="{{ url_for('book', isbn=book.isbn) }}" method="post">
-        <div class="row justify-content-end">
-          <div class="btn-group btn-group-toggle btn-group-sm" data-toggle="buttons">
-            <label class="btn btn-secondary">
-              <input type="radio" name="rating" id="rating1" value="1" autocomplete="off"> 1
-            </label>
-            <label class="btn btn-danger">
-              <input type="radio" name="rating" id="rating2" value="2" autocomplete="off"> 2
-            </label>
-            <label class="btn btn-warning">
-              <input type="radio" name="rating" id="rating3" value="3" autocomplete="off"> 3
-            </label>
-            <label class="btn btn-primary active">
-              <input type="radio" name="rating" id="rating4" value="4" autocomplete="off" checked> 4
-            </label>
-            <label class="btn btn-success">
-              <input type="radio" name="rating" id="rating5" value="5" autocomplete="off"> 5
-            </label>
+    <div class="container-fluid">
+      <h4>Комментарии:</h4>
+      {% for rev in reviews | reverse %}
+      <div class="row">
+        <div class="col-8 blr">
+          <div class="row">
+            <div class="col-6">
+              <h5>{{ rev.nickname }}</h5>
+            </div>
+            <div class="col-2">
+              <h5>Оценка: </h5>
+            </div>
+            <div class="col-4">
+              <div class="" data-stars="1">
+                {%if rev.rating == 1 %}
+                <svg height="25" width="23" class="stara">
+                  <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;"/>
+                </svg>
+                <svg height="25" width="23" class="starw">
+                  <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;"/>
+                </svg>
+                <svg height="25" width="23" class="starw">
+                  <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;"/>
+                </svg>
+                <svg height="25" width="23" class="starw">
+                  <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;"/>
+                </svg>
+                <svg height="25" width="23" class="starw">
+                  <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;"/>
+                </svg>
+                {% elif rev.rating == 2 %}
+                <svg height="25" width="23" class="stara">
+                  <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;"/>
+                </svg>
+                <svg height="25" width="23" class="stara">
+                  <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;"/>
+                </svg>
+                <svg height="25" width="23" class="starw">
+                  <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;"/>
+                </svg>
+                <svg height="25" width="23" class="starw">
+                  <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;"/>
+                </svg>
+                <svg height="25" width="23" class="starw">
+                  <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;"/>
+                </svg>
+                {% elif rev.rating == 3 %}
+                <svg height="25" width="23" class="stara">
+                  <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;"/>
+                </svg>
+                <svg height="25" width="23" class="stara">
+                  <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;"/>
+                </svg>
+                <svg height="25" width="23" class="stara">
+                  <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;"/>
+                </svg>
+                <svg height="25" width="23" class="starw">
+                  <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;"/>
+                </svg>
+                <svg height="25" width="23" class="starw">
+                  <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;"/>
+                </svg>
+                {% elif rev.rating == 4 %}
+                <svg height="25" width="23" class="stara">
+                  <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;"/>
+                </svg>
+                <svg height="25" width="23" class="stara">
+                  <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;"/>
+                </svg>
+                <svg height="25" width="23" class="stara">
+                  <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;"/>
+                </svg>
+                <svg height="25" width="23" class="stara">
+                  <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;"/>
+                </svg>
+                <svg height="25" width="23" class="starw">
+                  <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;"/>
+                </svg>
+                {% elif rev.rating == 5 %}
+                <svg height="25" width="23" class="stara">
+                  <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;"/>
+                </svg>
+                <svg height="25" width="23" class="stara">
+                  <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;"/>
+                </svg>
+                <svg height="25" width="23" class="stara">
+                  <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;"/>
+                </svg>
+                <svg height="25" width="23" class="stara">
+                  <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;"/>
+                </svg>
+                <svg height="25" width="23" class="stara">
+                  <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;"/>
+                </svg>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col blrw">
+              <h5>{{ rev.text }}</h5>
+            </div>
           </div>
         </div>
-        <div class="row justify-content-center">
-          <textarea class="form-control" name="review" rows="4" cols="60" placeholder="Напишите свой отзыв..." style="resize: none"></textarea>
-        </div>
-        <div class="row">
-          <button class="btn btn-primary" type="submit">Отправить</button>
-        </div>
-      </form>
+      </div>
+      {% endfor %}
     </div>
+    <h1>{{ kom }}</h1>
+    {% if kom %}
+    <div id="kom" class="container-fluid">
+      <div class="row justify-content-end">
+        <div class="col-2">
+          <h5>Ваша оценка</h5>
+        </div>
+        <div class="col-3">
+          <div class="stars" data-stars="1">
+            <svg id="star1" height="25" width="23" class="star rating" data-rating="1">
+              <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;"/>
+            </svg>
+            <svg id="star2" onclick="star2()" height="25" width="23" class="star rating" data-rating="2">
+              <polygon  points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;"/>
+            </svg>
+            <svg id="star3" onclick="star3()" height="25" width="23" class="star rating" data-rating="3">
+              <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;"/>
+            </svg>
+            <svg id="star4" height="25" width="23" class="star rating" data-rating="4">
+              <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;"/>
+            </svg>
+            <svg id="star5" height="25" width="23" class="star rating" data-rating="5">
+              <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <form class="" action="{{ url_for('book', isbn=book.isbn) }}" method="post">
+          <input style="display: none;" id="r1" type="radio" name="rating" id="rating1" value="1" autocomplete="off" checked>
+          <input style="display: none;" id="r2" type="radio" name="rating" id="rating2" value="2" autocomplete="off">
+          <input style="display: none;" id="r3" type="radio" name="rating" id="rating3" value="3" autocomplete="off">
+          <input style="display: none;" id="r4" type="radio" name="rating" id="rating4" value="4" autocomplete="off">
+          <input style="display: none;" id="r5" type="radio" name="rating" id="rating5" value="5" autocomplete="off">
+          <div class="row justify-content-center">
+            <div class="col-11">
+              <textarea style="background-color: rgba(60,60,60,0.5); color: white;" maxlength="400" class="form-control" name="review" rows="4" cols="98"  placeholder="Напишите свой отзыв..." style="resize: none"></textarea>
+              <button class="btn btn-primary" type="submit">Отправить</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    {% endif %}
   </div>
-  {% endif %}
 {% endblock %}

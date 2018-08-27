@@ -15,7 +15,6 @@
 {% block search %}
 {% endblock %}
 
-
 {% block title %}
   Книги?
 {% endblock %}
@@ -23,23 +22,35 @@
 {% block body %}
   {% if login %}
     {%if search %}
+    <div class="wh container-fluid">
+      <div class="row">
+          <h2>Поиск</h2>
+        <div class="col-8">
+          <form class="form-inline my-4 my-lg-0" action="{{ url_for('index') }}" method="post">
+            <input class="form-control mr-sm-2" name="search" type="search" size="50" placeholder="Название книги, автор или ISBN номер" aria-label="Search">
+            <button class="btn btn-primary my-2 my-sm-0" type="submit">Найти</button>
+          </form>
+        </div>
+      </div>
       {% for row in result %}
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-6">
-            <h3><a href="{{ url_for('book', isbn=row.isbn) }}">{{ row.title }}</a></h3>
-          </div>
+      <div class="row">
+        <div onclick="location.href='{{ url_for('book', isbn=row.isbn) }}'" class="col-8 link blr">
+          <h4>{{ row.title }}</h4>
+          <h5>Автор: {{ row.author }}</h5>
+          <h5>Год: {{ row.year }}</h5>
         </div>
       </div>
       {% else %}
-      <div class="container">
-        <div class="row justify-content-center">
-          <h3>Ничего не найдено</h3>
+        <div class="row align-items-end">
+          <div class="col-8">
+            <h5>Ничего не найдено <br> Возможно этой книги нет в нашей базе или вы написали что-то не то </h5>
+          </div>
         </div>
-      </div>
       {% endfor %}
+    </div>
+
     {% else %}
-    <div style="color: white;" class="container-fluid h-100">
+    <div class="wh container-fluid h-100">
       <div class="row justify-content-center">
           <h2>Поиск</h2>
         <div class="col-8">
