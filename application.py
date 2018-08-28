@@ -112,12 +112,8 @@ def book(isbn):
             if len(session["history"]) > 3:
                 session["history"].pop(0)
             session["history"].append(book)
-        revUsers = db.execute("SELECT nickname FROM reviews JOIN users ON users.id=reviews.user_id WHERE reviews.book_isbn=:isbn",
-                                {"isbn": isbn})
-        if session["nickname"] in revUsers:
-            kom = False
-        else:
-            kom = True
+        revUsers = db.execute("SELECT nickname, book_isbn FROM reviews JOIN users ON users.id=reviews.user_id WHERE book_isbn=:isbn AND nickname=:nickname",
+                                {"isbn": isbn, "nickname": session["nickname"]}).rowcount == 0
         if book is None:
             return render_template("error.html", message="No book")
         res = requests.get("https://www.goodreads.com/book/review_counts.json",
@@ -126,10 +122,10 @@ def book(isbn):
             gr = {'average': "", 'rcount': ""}
             gr['average'] = res.json()['books'][0]['average_rating']
             gr['rcount'] = res.json()['books'][0]['work_ratings_count']
-            return render_template("book.html", kom=kom, reviews=reviews, gr=gr, book=book,
+            return render_template("book.html", kom=revUsers, reviews=reviews, gr=gr, book=book,
                                     nickname = session["nickname"], login = session["login"])
         else:
-            return render_template("book.html", kom=kom, reviews=reviews, book=book,
+            return render_template("book.html", kom=revUsers, reviews=reviews, book=book,
                                     nickname = session["nickname"], login = session["login"])
     if request.method == "POST":
         if session["id"]:
