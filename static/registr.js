@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelector('#submit').disabled = false;
     }
     else{
-      document.querySelector('#err1').innerHTML = "Пароли не совпадают"
-      document.querySelector('#err2').innerHTML = "Пароли не совпадают"
+      document.querySelector('#err1').innerHTML = "Пароли не совпадают";
+      document.querySelector('#err2').innerHTML = "Пароли не совпадают";
 
       document.querySelector('#Password1').classList.add('is-invalid');
       document.querySelector('#cPassword1').classList.add('is-invalid');
@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   document.querySelector('#login').onkeyup = () => {
+    document.querySelector('#err0').innerHTML = "";
     if (document.querySelector('#login').value && document.querySelector('#Password1').value && document.querySelector('#cPassword1').value){
       document.querySelector('#submit').disabled = false;
     }
