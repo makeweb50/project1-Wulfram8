@@ -1,0 +1,130 @@
+body {
+  font-family: SansationLight;
+}
+
+.stars {
+  cursor: pointer;
+}
+.stars:hover .star polygon {
+  fill: #ffd055 !important;
+}
+.stars .star {
+  float: left;
+}
+.stars .star polygon {
+  fill: #d8d8d8;
+}
+.stars .star:hover ~ .star polygon {
+  fill: #d8d8d8 !important;
+}
+.stars[data-stars] .star polygon {
+  fill: #ffd055;
+}
+.stars[data-stars="1"] .star:nth-child(1) ~ .star polygon {
+  fill: #d8d8d8;
+}
+.stars[data-stars="2"] .star:nth-child(2) ~ .star polygon {
+  fill: #d8d8d8;
+}
+.stars[data-stars="3"] .star:nth-child(3) ~ .star polygon {
+  fill: #d8d8d8;
+}
+.stars[data-stars="4"] .star:nth-child(4) ~ .star polygon {
+  fill: #d8d8d8;
+}
+.stars[data-stars="5"] .star:nth-child(5) ~ .star polygon {
+  fill: #d8d8d8;
+}
+
+.starw {
+  fill: #d8d8d8 !important;
+}
+
+.stara polygon {
+  fill: #ffd055 !important;
+}
+
+.blr {
+  background: rgba(60,60,60,0.5);
+  margin: 10px;
+  padding: 10px;
+}
+
+#kom {
+  background: rgba(60,60,60,0.5);
+  margin: 10px;
+  padding: 15px;
+
+}
+
+.blrw {
+  background: rgba(80, 80, 80, 0.8);
+  margin: 20px;
+  padding: 10px;
+}
+
+.wh {
+  color: white;
+}
+
+.link:hover {
+  cursor: pointer;
+  background: rgba(80, 80, 80, 0.8);
+}
+
+.etonav {
+  opacity: 0.8;
+}
+
+.logo:hover {
+  cursor: pointer;
+}
+
+.logo {
+  position: absolute;
+  margin: 20px;
+  margin-left: 0px;
+  color: white;
+  font-family: PlasticBug;
+  font-size: 100px;
+  opacity: 0.8;
+}
+
+label {
+  font-size: 20px;
+}
+
+.footer {
+  position: fixed;
+  top: 96%;
+  width: 100%;
+  height: 27px;
+  background: rgba(0,0,0,0.50);
+  font-family: PlasticBug;
+  font-size: 20px;
+}
+
+.blur {
+  position: absolute;
+  top: 34%;
+  width: 430px;
+  padding: 10px;
+  padding-bottom: 20px;
+  border-radius: 10px;
+  background: rgba(0,0,0,0.35)
+}
+
+
+@font-face {
+font-family: "SansationLight";
+src: url("Sansation-Light.ttf") format("truetype");
+font-style: normal;
+font-weight: normal;
+}
+
+@font-face {
+font-family: "PlasticBug";
+src: url("PLASTICB.TTF") format("truetype");
+font-style: normal;
+font-weight: normal;
+}
