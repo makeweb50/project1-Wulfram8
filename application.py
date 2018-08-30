@@ -55,7 +55,7 @@ def registr():
         password = request.form.get("password")
 
         if db.execute("SELECT * FROM users WHERE login = lower(:login)", {"login": login}).rowcount != 0:
-            return "Login zanyat"
+            return render_template('registr.html', error='Логин занят')
 
         if login and password:
             if not nickname:
@@ -68,7 +68,7 @@ def registr():
         else:
             return render_template('error.html', message='400, Bad request'), 400
 
-        return redirect(url_for('index'))
+        return render_template('index.html', success=True)
 
 @app.route("/signin", methods=["GET", "POST"])
 def signin():

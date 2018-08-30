@@ -91,10 +91,15 @@
     <div style="top: 38%; text-align: center; color: white;" class="container-fluid h-100">
       <div class="row justify-content-center">
         <div class="blur">
+          {% if success %}
+          <h3>Вы теперь зарегистрировались и можете зайти в <br> свой аккаунт:</h3>
+          <a role="button" aria-pressed="true" href="{{ url_for('signin') }}" class="btn btn-primary btn-lg">Войти</a>
+          {% else %}
           <h3>Тут чужакам не рады так <br> что будьте добры</h3>
           <a role="button" aria-pressed="true" href="{{ url_for('registr') }}" class="btn btn-primary btn-lg">Зарегистрироваться</a>
           <h5>или</h5>
           <a role="button" aria-pressed="true" href="{{ url_for('signin') }}" class="btn btn-primary btn-lg">Войти</a>
+          {% endif %}
         </div>
         <div class="row footer">
           <div class="col"></div>
